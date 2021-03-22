@@ -1,3 +1,3 @@
 module "cloud-mysql-server" {
-  source = "./cloudsql-my-sql-server"
+  source = "./modules/cloudsql-mysql-server"
 }
