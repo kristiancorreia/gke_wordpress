@@ -1,4 +1,4 @@
- resource "google_sql_database_instance" "master" {
+ resource "google_sql_database_instance" "kc-gke-wp-sql-server" {
   name             = "kc-gke-wp-sql-server"
   database_version = "MYSQL_5_7"
   region           = "northamerica-northeast1"
