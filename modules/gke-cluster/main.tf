@@ -51,33 +51,33 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
 }
 
 
-resource "kubernetes_persistent_volume_claim" "example" {
+resource "kubernetes_persistent_volume_claim" "wordpress-volumeclaim" {
   metadata {
-    name = "exampleclaimname"
+    name = "wordpress-volumeclaim"
   }
   spec {
-    access_modes = ["ReadWriteMany"]
+    access_modes = ["ReadWriteOnce"]
     resources {
       requests = {
-        storage = "5Gi"
+        storage = "100Gi"
       }
     }
-    volume_name = "${kubernetes_persistent_volume.example.metadata.0.name}"
+    volume_name = "${kubernetes_persistent_volume.wordpress-volume.metadata.0.name}"
   }
 }
 
-resource "kubernetes_persistent_volume" "example" {
+resource "kubernetes_persistent_volume" "wordpress-volume" {
   metadata {
-    name = "examplevolumename"
+    name = "wordpress-volume"
   }
   spec {
     capacity = {
-      storage = "10Gi"
+      storage = "100Gi"
     }
-    access_modes = ["ReadWriteMany"]
+    access_modes = ["ReadWriteOnce"]
     persistent_volume_source {
       gce_persistent_disk {
-        pd_name = "test-123"
+        pd_name = "disk-1"
       }
     }
   }
