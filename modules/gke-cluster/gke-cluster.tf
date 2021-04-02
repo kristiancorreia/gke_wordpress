@@ -50,35 +50,10 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
   }
 }
 
-
-resource "kubernetes_persistent_volume_claim" "wordpress-volumeclaim" {
-  metadata {
-    name = "wordpress-volumeclaim"
-  }
-  spec {
-    access_modes = ["ReadWriteOnce"]
-    resources {
-      requests = {
-        storage = "100Gi"
-      }
-    }
-    volume_name = "${kubernetes_persistent_volume.wordpress-volume.metadata.0.name}"
-  }
+output "cluster_endpoint" {
+  value = google_container_cluster.kc-gke-wp-gke-cluster.endpoint
 }
 
-resource "kubernetes_persistent_volume" "wordpress-volume" {
-  metadata {
-    name = "wordpress-volume"
-  }
-  spec {
-    capacity = {
-      storage = "100Gi"
-    }
-    access_modes = ["ReadWriteOnce"]
-    persistent_volume_source {
-      gce_persistent_disk {
-        pd_name = "disk-1"
-      }
-    }
-  }
+output "cluster_ca_certificate" {
+  value = google_container_cluster.kc-gke-wp-gke-cluster.master_auth[0].cluster_ca_certificate
 }
