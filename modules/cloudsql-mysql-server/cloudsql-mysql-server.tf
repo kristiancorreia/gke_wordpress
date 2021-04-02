@@ -1,5 +1,9 @@
+ resource "random_id" "db_name_suffix" {
+  byte_length = 4
+}
+ 
  resource "google_sql_database_instance" "kc-gke-wp-sql-server" {
-  name             = "kc-gke-wp-sql-server"
+  name             = "kc-gke-wp-sql-server-${random_id.db_name_suffix.hex}"
   database_version = "MYSQL_5_7"
   region           = "northamerica-northeast1"
 
@@ -8,4 +12,14 @@
     # type. See argument reference below.
     tier = "db-f1-micro"
   }
+  deletion_protection = "false"
+}
+
+
+
+resource "google_sql_user" "wordpress" {
+  name     = "wordpress"
+  instance = google_sql_database_instance.kc-gke-wp-sql-server.name
+  host = "%"
+  password = "bluebanana"
 }
