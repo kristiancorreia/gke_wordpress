@@ -1,13 +1,8 @@
-resource "google_service_account" "kc-gke-wp-gke-sa" {
-  account_id   = "service-account-id"
-  display_name = "Service Account"
-}
-
 resource "google_container_cluster" "kc-gke-wp-gke-cluster" {
   name     = "kc-gke-wp-gke-cluster"
   location = "northamerica-northeast1"
 
-  remove_default_node_pool = true
+  remove_default_node_pool = false
   initial_node_count       = 1
 
   master_auth {
@@ -38,9 +33,6 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
   node_config {
     preemptible  = true
     machine_type = "e2-medium"
-
-    # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
-    service_account = google_service_account.kc-gke-wp-gke-sa.email
     oauth_scopes    = [
       "https://www.googleapis.com/auth/cloud-platform"
     ]
