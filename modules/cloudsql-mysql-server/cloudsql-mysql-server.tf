@@ -1,6 +1,12 @@
  resource "random_id" "db_name_suffix" {
   byte_length = 4
 }
+
+resource "random_password" "password" {
+  length           = 16
+  special          = true
+  override_special = "_%@"
+}
  
  resource "google_sql_database_instance" "kc-gke-wp-sql-server" {
   name             = "kc-gke-wp-sql-server-${random_id.db_name_suffix.hex}"
@@ -21,5 +27,14 @@ resource "google_sql_user" "wordpress" {
   name     = "wordpress"
   instance = google_sql_database_instance.kc-gke-wp-sql-server.name
   host = "%"
-  password = "bluebanana"
+  password = random_password.password.result
+}
+
+output "sql_instance_username" {
+  value = google_sql_user.wordpress.name
+}
+
+output "sql_instance_password" {
+  value = google_sql_user.wordpress.password
+  sensitive = true
 }

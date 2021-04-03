@@ -19,10 +19,8 @@ resource "google_service_account_key" "kc-gke-wp-sa-key" {
   public_key_type    = "TYPE_X509_PEM_FILE"
 }
 
-output "service-account-email" {
-  value = google_service_account.kc-gke-wp-sa.email
-}
 
 output "service_account_key" {
-  value = google_service_account_key.kc-gke-wp-sa-key.public_key
+  value = google_service_account_key.kc-gke-wp-sa-key.private_key
+  sensitive = true
 }
