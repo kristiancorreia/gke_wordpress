@@ -30,3 +30,10 @@ module "secret-cloud-sql-instance-credentials" {
   imported_cluster_ca_certificate = module.gke-cluster.cluster_ca_certificate
   imported_sa_key = module.service-account.service_account_key
 }
+
+module "wordpress-deployment" {
+  source = "./modules/wordpress-deployment"
+  imported_cluster_endpoint = module.gke-cluster.cluster_endpoint
+  imported_cluster_ca_certificate = module.gke-cluster.cluster_ca_certificate
+  imported_cloud_sql_name = module.cloud-sql-server.sql_instance_connection_name
+}

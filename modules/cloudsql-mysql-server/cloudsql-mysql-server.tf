@@ -38,3 +38,8 @@ output "sql_instance_password" {
   value = google_sql_user.wordpress.password
   sensitive = true
 }
+
+output "sql_instance_connection_name" {
+  value = google_sql_user.wordpress.connection_name
+  sensitive = true
+}
