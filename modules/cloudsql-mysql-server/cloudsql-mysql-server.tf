@@ -40,6 +40,5 @@ output "sql_instance_password" {
 }
 
 output "sql_instance_connection_name" {
-  value = google_sql_user.wordpress.connection_name
-  sensitive = true
+  value = google_sql_database_instance.kc-gke-wp-sql-server.connection_name
 }

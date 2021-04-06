@@ -28,7 +28,7 @@ resource "kubernetes_deployment" "wordpress-deployment" {
   }
 
   spec {
-    replicas = 1
+    replicas = "1"
     selector {
       match_labels = {
         app = "wordpress"
@@ -47,10 +47,10 @@ resource "kubernetes_deployment" "wordpress-deployment" {
           name  = "wordpress"
           env {
               name = "WORDPRESS_DB_HOST"
-              value "127.0.0.1:3306"
+              value = "127.0.0.1:3306"
           }
           env {
-              name "WORDPRESS_DB_USER"
+              name = "WORDPRESS_DB_USER"
               value_from {
                   secret_key_ref {
                     name = "cloud-sql-db-credentials"
@@ -59,7 +59,7 @@ resource "kubernetes_deployment" "wordpress-deployment" {
               }
           }
           env {
-              name "WORDPRESS_DB_PASSWORD"
+              name = "WORDPRESS_DB_PASSWORD"
               value_from {
                   secret_key_ref {
                     name = "cloud-sql-db-credentials"
@@ -87,22 +87,22 @@ resource "kubernetes_deployment" "wordpress-deployment" {
               allow_privilege_escalation = "false"
           }
           volume_mount {
-              name = "cloudsql-instance-credentials"
+              name = "cloud-sql-instance-credentials"
               mount_path = "/secrets/cloudsql"
-              read_only "true"
+              read_only = "true"
           }
 
         }
         volume {
           name = "wordpress-persistent-storage"
-          persistant_volume_claim {
+          persistent_volume_claim {
             claim_name = "wordpress-volumeclaim"
           }
         }
         volume {
-          name = "cloudsql-instance-credentials"
+          name = "cloud-sql-instance-credentials"
           secret {
-            secret_name = "cloudsql-instance-credentials"
+            secret_name = "cloud-sql-instance-credentials"
           }
         }
       }

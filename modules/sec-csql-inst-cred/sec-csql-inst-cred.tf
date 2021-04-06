@@ -24,6 +24,6 @@ resource "kubernetes_secret" "cloud-sql-instance-credentials" {
   }
 
   data = {
-    "key.json" = var.imported_sa_key
+    "key.json" = "${base64decode(var.imported_sa_key)}"
   }
 }

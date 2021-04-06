@@ -1,8 +1,8 @@
 resource "google_container_cluster" "kc-gke-wp-gke-cluster" {
   name     = "kc-gke-wp-gke-cluster"
-  location = "northamerica-northeast1"
+  location = "northamerica-northeast1-c"
 
-  remove_default_node_pool = false
+  remove_default_node_pool = true
   initial_node_count       = 1
 
   master_auth {
@@ -21,9 +21,9 @@ resource "google_container_cluster" "kc-gke-wp-gke-cluster" {
 
 resource "google_container_node_pool" "primary_preemptible_nodes" {
   name       = "primary-node-pool"
-  location   = "northamerica-northeast1"
+  location   = "northamerica-northeast1-c"
   cluster    = google_container_cluster.kc-gke-wp-gke-cluster.name
-  node_count = 1
+  node_count = 3
   management {
     auto_upgrade = true
     auto_repair = true
