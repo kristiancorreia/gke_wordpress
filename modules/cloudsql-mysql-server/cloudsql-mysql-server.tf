@@ -21,7 +21,10 @@ resource "random_password" "password" {
   deletion_protection = "false"
 }
 
-
+resource "google_sql_database" "wordpress" {
+  name = "wordpress"
+  instance = google_sql_database_instance.kc-gke-wp-sql-server.name
+}
 
 resource "google_sql_user" "wordpress" {
   name     = "wordpress"
