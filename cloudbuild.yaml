@@ -1,3 +1,5 @@
 steps:
-- name: 'bash'
-  args: ['echo', 'I am running a bash command']
+- name: 'hashicorp/terraform:0.11.14'
+  entrypoint: 'sh'
+  args:
+    - 'terraform apply -auto-approve'
