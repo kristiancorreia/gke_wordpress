@@ -1,5 +1,12 @@
 steps:
-- name: 'hashicorp/terraform:0.11.14'
+- id: 'tf init'
+  name: 'hashicorp/terraform:0.11.14'
+  entrypoint: 'sh'
+  args:
+    - 'terraform init'
+
+- id: 'tf apply'
+  name: 'hashicorp/terraform:0.11.14'
   entrypoint: 'sh'
   args:
     - 'terraform apply -auto-approve'
