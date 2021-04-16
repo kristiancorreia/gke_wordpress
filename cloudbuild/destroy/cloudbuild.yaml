@@ -6,7 +6,7 @@ steps:
     - '-c'
     - 'terraform init'
 
-- id: 'tf apply'
+- id: 'tf destroy'
   name: 'hashicorp/terraform:0.12.24'
   entrypoint: 'sh'
   args:
