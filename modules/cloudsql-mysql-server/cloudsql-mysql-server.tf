@@ -2,11 +2,13 @@
   byte_length = 4
 }
 
-resource "random_password" "password" {
-  length           = 16
-  special          = true
-  override_special = "_%@"
-}
+/*
+*resource "random_password" "password" {
+*  length           = 16
+*  special          = true
+*  override_special = "_%@"
+*} 
+*/
  
  resource "google_sql_database_instance" "kc-gke-wp-sql-server" {
   name             = "kc-gke-wp-sql-server-${random_id.db_name_suffix.hex}"
@@ -30,7 +32,8 @@ resource "google_sql_user" "wordpress" {
   name     = "wordpress"
   instance = google_sql_database_instance.kc-gke-wp-sql-server.name
   host = "%"
-  password = random_password.password.result
+  #password = random_password.password.result
+  password = "bramblebramble"
 }
 
 output "sql_instance_username" {
