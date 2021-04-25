@@ -1,15 +1,3 @@
-variable "imported_cluster_endpoint" {
-    type = string
-}
-
-variable "imported_cluster_ca_certificate" {
-  type = string
-}
-
-variable "imported_cloud_sql_name" {
-  type = string
-}
-
 data "google_client_config" "default" {}
 
 provider "kubernetes" {
@@ -26,7 +14,6 @@ resource "kubernetes_deployment" "wordpress-deployment" {
     app = "wodpress"
     }
   }
-
   spec {
     replicas = "1"
     selector {
@@ -40,32 +27,31 @@ resource "kubernetes_deployment" "wordpress-deployment" {
           app = "wordpress"
         }
       }
-
       spec {
         container {
           image = "wordpress"
           name  = "wordpress"
           env {
-              name = "WORDPRESS_DB_HOST"
-              value = "127.0.0.1:3306"
+            name = "WORDPRESS_DB_HOST"
+            value = "127.0.0.1:3306"
           }
           env {
-              name = "WORDPRESS_DB_USER"
-              value_from {
-                  secret_key_ref {
-                    name = "cloud-sql-db-credentials"
-                    key = "username"
-                  }
+            name = "WORDPRESS_DB_USER"
+            value_from {
+              secret_key_ref {
+                name = "cloud-sql-db-credentials"
+                key = "username"
               }
+            }
           }
           env {
-              name = "WORDPRESS_DB_PASSWORD"
-              value_from {
-                  secret_key_ref {
-                    name = "cloud-sql-db-credentials"
-                    key = "password"
-                  }
+            name = "WORDPRESS_DB_PASSWORD"
+            value_from {
+              secret_key_ref {
+                name = "cloud-sql-db-credentials"
+                key = "password"
               }
+            }
           }
           port {
             container_port = "80"
@@ -83,15 +69,14 @@ resource "kubernetes_deployment" "wordpress-deployment" {
                     "-instances=${var.imported_cloud_sql_name}=tcp:3306",
                     "-credential_file=/secrets/cloudsql/key.json"]
           security_context {
-              run_as_user = "2"
-              allow_privilege_escalation = "false"
+            run_as_user = "2"
+            allow_privilege_escalation = "false"
           }
           volume_mount {
-              name = "cloud-sql-instance-credentials"
-              mount_path = "/secrets/cloudsql"
-              read_only = "true"
+            name = "cloud-sql-instance-credentials"
+            mount_path = "/secrets/cloudsql"
+            read_only = "true"
           }
-
         }
         volume {
           name = "wordpress-persistent-storage"
