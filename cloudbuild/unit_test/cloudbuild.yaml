@@ -1,6 +1,6 @@
 steps:
-- name: 'debian'
-  args: ['cd', 'tests/unit']
+- name: 'cd'
+  args: ['tests/unit']
 
 - name: 'go'
   args: ['get', 'github.com/gruntwork-io/terratest/modules/gcp']
