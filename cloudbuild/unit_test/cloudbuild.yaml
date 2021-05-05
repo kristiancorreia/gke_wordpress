@@ -1,7 +1,7 @@
 steps:
 
 - name: 'golang'
-  args: ['get', 'github.com/gruntwork-io/terratest/modules/gcp']
+  args: ['go','get', 'github.com/gruntwork-io/terratest/modules/gcp']
 
 - name: 'golang'
   args: ['go', 'get', 'github.com/gruntwork-io/terratest/modules/terraform']
