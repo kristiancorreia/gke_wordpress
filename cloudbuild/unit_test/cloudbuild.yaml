@@ -1,0 +1,7 @@
+steps:
+- id: 'test'
+  name: 'golang'
+  entrypoint: 'sh'
+  args:
+    - '-c'
+    - 'cd tests/unit ; go test -v ./...'
