@@ -1,7 +1,15 @@
 steps:
-- id: 'test'
-  name: 'golang'
-  entrypoint: 'sh'
-  args:
-    - '-c'
-    - 'cd tests/unit ; go test -v ./...'
+- name: 'ubuntu'
+  args: ['cd', 'tests/unit']
+
+- name: 'go'
+  args: ['get', 'github.com/gruntwork-io/terratest/modules/gcp']
+
+- name: 'go'
+  args: ['mod', 'init', 'terraunittest']
+
+- name: 'go'
+  args: ['mod', 'tidy']
+
+- name: 'go'
+  args: ['test', '-v', './...', '-timeout', '30m']
