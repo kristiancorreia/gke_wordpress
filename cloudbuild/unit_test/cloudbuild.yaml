@@ -1,19 +1,19 @@
 steps:
 
-- name: 'go'
+- name: 'golang'
   args: ['get', 'github.com/gruntwork-io/terratest/modules/gcp']
 
-- name: 'go'
-  args: ['get', 'github.com/gruntwork-io/terratest/modules/terraform']
+- name: 'golang'
+  args: ['go', 'get', 'github.com/gruntwork-io/terratest/modules/terraform']
 
-- name: 'go'
-  args: ['mod', 'init', 'terraunittest']
+- name: 'golang'
+  args: ['go', 'mod', 'init', 'terraunittest']
   dir: 'test/unit'
 
-- name: 'go'
-  args: ['mod', 'tidy']
+- name: 'golang'
+  args: ['go', 'mod', 'tidy']
   dir: 'test/unit'
 
-- name: 'go'
-  args: ['test', '-v', './...', '-timeout', '30m']
+- name: 'golang'
+  args: ['go', 'test', '-v', './...', '-timeout', '30m']
   dir: 'test/unit'
