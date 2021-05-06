@@ -8,12 +8,12 @@ steps:
 
 - name: 'golang'
   args: ['go', 'mod', 'init', 'terraunittest']
-  dir: 'test/unit'
+  dir: 'tests/unit'
 
 - name: 'golang'
   args: ['go', 'mod', 'tidy']
-  dir: 'test/unit'
+  dir: 'tests/unit'
 
 - name: 'golang'
   args: ['go', 'test', '-v', './...', '-timeout', '30m']
-  dir: 'test/unit'
+  dir: 'tests/unit'
