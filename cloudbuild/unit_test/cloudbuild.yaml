@@ -1,7 +1,7 @@
 steps:
 
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  args: ['gcloud', 'config', 'set', 'project', 'kc-gke-wp']
+- name: 'debian'
+  args: ['echo', 'GOOGLE_PROJECT=kc-gke-wp']
 
 - name: 'golang'
   args: ['go','get', 'github.com/gruntwork-io/terratest/modules/gcp']
