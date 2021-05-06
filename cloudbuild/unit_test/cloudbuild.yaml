@@ -1,8 +1,5 @@
 steps:
 
-- name: 'debian'
-  args: ['echo', 'GOOGLE_PROJECT=kc-gke-wp']
-
 - name: 'golang'
   args: ['go','get', 'github.com/gruntwork-io/terratest/modules/gcp']
 
@@ -20,3 +17,4 @@ steps:
 - name: 'golang'
   args: ['go', 'test', '-v', './...', '-timeout', '30m']
   dir: 'tests/unit'
+  env: ['GCLOUD_PROJECT=kc-gke-wp']
