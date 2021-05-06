@@ -14,7 +14,15 @@ steps:
   args: ['go', 'mod', 'tidy']
   dir: 'tests/unit'
 
-- name: 'golang'
-  args: ['go', 'test', '-v', './...', '-timeout', '30m']
+#- name: 'golang'
+#  args: ['go', 'test', '-v', './...', '-timeout', '30m']
+#  dir: 'tests/unit'
+#  env: ['GCLOUD_PROJECT=kc-gke-wp']
+
+- name: 'hashicorp/terraform:full'
   dir: 'tests/unit'
   env: ['GCLOUD_PROJECT=kc-gke-wp']
+  entrypoint: 'sh'
+  args:
+    - '-c'
+    - 'go test -v ./... -timeout 30m'
