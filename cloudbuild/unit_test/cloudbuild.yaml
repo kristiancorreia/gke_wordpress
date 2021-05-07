@@ -19,7 +19,7 @@ steps:
 #  dir: 'tests/unit'
 #  env: ['GCLOUD_PROJECT=kc-gke-wp']
 
-- name: 'hashicorp/terraform:full'
+- name: 'hashicorp/terraform:0.12.24'
   dir: 'tests/unit'
   env: ['GCLOUD_PROJECT=kc-gke-wp']
   entrypoint: 'sh'
