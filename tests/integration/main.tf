@@ -3,5 +3,5 @@ provider "google" {
 }
 
 module "gke-cluster" {
-  source = "../../../"
+  source = "../../"
 }
