@@ -1,10 +1,47 @@
-terraform {
-  # This module is now only being tested with Terraform 0.13.x. However, to make upgrading easier, we are setting
-  # 0.12.26 as the minimum version, as that version added support for required_providers with source URLs, making it
-  # forwards compatible with 0.13.x code.
-  required_version = ">= 0.12.26"
+ resource "random_id" "db_name_suffix" {
+  byte_length = 4
 }
 
-output "hello_world" {
-  value = "Hello, World!"
+resource "random_password" "password" {
+  length           = 16
+  special          = true
+  override_special = "_%@"
+}
+ 
+ resource "google_sql_database_instance" "kc-gke-wp-sql-server" {
+  name             = "kc-gke-wp-sql-server-${random_id.db_name_suffix.hex}"
+  database_version = "MYSQL_5_7"
+  region           = "northamerica-northeast1"
+
+  settings {
+    # Second-generation instance tiers are based on the machine
+    # type. See argument reference below.
+    tier = "db-f1-micro"
+  }
+  deletion_protection = "false"
+}
+
+resource "google_sql_database" "wordpress" {
+  name = "wordpress"
+  instance = google_sql_database_instance.kc-gke-wp-sql-server.name
+}
+
+resource "google_sql_user" "wordpress" {
+  name     = "wordpress"
+  instance = google_sql_database_instance.kc-gke-wp-sql-server.name
+  host = "%"
+  password = random_password.password.result
+}
+
+output "sql_instance_username" {
+  value = google_sql_user.wordpress.name
+}
+
+output "sql_instance_password" {
+  value = google_sql_user.wordpress.password
+  sensitive = true
+}
+
+output "sql_instance_connection_name" {
+  value = google_sql_database_instance.kc-gke-wp-sql-server.connection_name
 }
