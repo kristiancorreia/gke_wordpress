@@ -2,6 +2,6 @@ provider "google" {
   project = "kc-gke-wp"
 }
 
-module "gke-cluster" {
+module "full_build" {
   source = "../../"
 }

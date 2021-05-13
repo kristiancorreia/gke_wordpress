@@ -19,4 +19,4 @@ steps:
   dir: 'tests/unit'
   env: ['GCLOUD_PROJECT=kc-gke-wp']
 
-timeout: 1800s
+timeout: 3600s
