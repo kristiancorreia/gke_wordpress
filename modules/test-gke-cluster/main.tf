@@ -3,7 +3,7 @@
 }
 
 resource "google_container_cluster" "test-gke-cluster" {
-  name     = "test-gke-cluster-${cluster_suffix.hex}"
+  name     = "test-gke-cluster-${random_id.cluster_suffix.hex}"
   location = "northamerica-northeast1-c"
 
   remove_default_node_pool = false

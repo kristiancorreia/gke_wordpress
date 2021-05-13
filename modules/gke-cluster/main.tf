@@ -3,7 +3,7 @@
 }
 
 resource "google_container_cluster" "kc-gke-wp-gke-cluster" {
-  name     = "kc-gke-wp-gke-cluster-${cluster_suffix.hex}"
+  name     = "kc-gke-wp-gke-cluster-${random_id.cluster_suffix.hex}"
   location = "northamerica-northeast1-c"
 
   remove_default_node_pool = true
