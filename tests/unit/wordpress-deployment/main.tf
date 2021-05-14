@@ -14,5 +14,5 @@ module "wordpress-deployment" {
   source = "../../../modules/wordpress-deployment"
   imported_cluster_endpoint = module.test-gke-cluster.cluster_endpoint
   imported_cluster_ca_certificate = module.test-gke-cluster.cluster_ca_certificate
-  imported_cloud_sql_name = module.cloud-sql-server.sql_instance_connection_name
+  imported_cloud_sql_name = module.cloudsql-mysql-server.sql_instance_connection_name
 }
