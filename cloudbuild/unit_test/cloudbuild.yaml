@@ -15,7 +15,7 @@ steps:
   dir: 'tests/unit'
 
 - name: 'binxio/terratest-runner-gcp'
-  args: ['go', 'test', '-v', './_MOD_NAME', '-timeout', '120m', '-p', '1']
+  args: ['go', 'test', '-v', './${_MOD_NAME}', '-timeout', '120m', '-p', '1']
   dir: 'tests/unit'
   env: ['GCLOUD_PROJECT=kc-gke-wp']
 
