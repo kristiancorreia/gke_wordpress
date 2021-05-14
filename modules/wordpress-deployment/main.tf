@@ -11,7 +11,7 @@ resource "kubernetes_deployment" "wordpress-deployment" {
   metadata {
     name = "wordpress-deployment"
     labels = {
-    app = "wodpress"
+    app = "wordpress"
     }
   }
   spec {
