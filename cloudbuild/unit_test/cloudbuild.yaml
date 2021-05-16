@@ -1,16 +1,16 @@
 steps:
 
-- name: 'golang'
+- name: 'binxio/terratest-runner-gcp'
   args: ['go','get', 'github.com/gruntwork-io/terratest/modules/gcp']
 
-- name: 'golang'
+- name: 'binxio/terratest-runner-gcp'
   args: ['go', 'get', 'github.com/gruntwork-io/terratest/modules/terraform']
 
-- name: 'golang'
+- name: 'binxio/terratest-runner-gcp'
   args: ['go', 'mod', 'init', 'terraunittest']
   dir: 'tests/unit/${_MOD_NAME}'
 
-- name: 'golang'
+- name: 'binxio/terratest-runner-gcp'
   args: ['go', 'mod', 'tidy']
   dir: 'tests/unit/${_MOD_NAME}'
 
