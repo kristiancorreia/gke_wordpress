@@ -39,7 +39,7 @@ resource "kubernetes_deployment" "wordpress-deployment" {
             name = "WORDPRESS_DB_USER"
             value_from {
               secret_key_ref {
-                name = "cloud-sql-db-credentials"
+                name = var.imported_csql_db_cred_sec_name
                 key = "username"
               }
             }
@@ -48,7 +48,7 @@ resource "kubernetes_deployment" "wordpress-deployment" {
             name = "WORDPRESS_DB_PASSWORD"
             value_from {
               secret_key_ref {
-                name = "cloud-sql-db-credentials"
+                name = var.imported_csql_db_cred_sec_name
                 key = "password"
               }
             }
@@ -81,13 +81,13 @@ resource "kubernetes_deployment" "wordpress-deployment" {
         volume {
           name = "wordpress-persistent-storage"
           persistent_volume_claim {
-            claim_name = "wordpress-volumeclaim"
+            claim_name = var.imported_pvc_name
           }
         }
         volume {
           name = "cloud-sql-instance-credentials"
           secret {
-            secret_name = "cloud-sql-instance-credentials"
+            secret_name = var.imported_csql_inst_cred_sec_name
           }
         }
       }
