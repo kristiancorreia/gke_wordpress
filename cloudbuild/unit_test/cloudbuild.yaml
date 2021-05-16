@@ -1,12 +1,6 @@
 steps:
 
 - name: 'binxio/terratest-runner-gcp'
-  args: ['go','get', 'github.com/gruntwork-io/terratest/modules/gcp']
-
-- name: 'binxio/terratest-runner-gcp'
-  args: ['go', 'get', 'github.com/gruntwork-io/terratest/modules/terraform']
-
-- name: 'binxio/terratest-runner-gcp'
   args: ['go', 'mod', 'init', 'terraunittest']
   dir: 'tests/unit/${_MOD_NAME}'
 
