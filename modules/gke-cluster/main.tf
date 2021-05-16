@@ -1,4 +1,4 @@
- resource "random_id" "cluster_suffix" {
+resource "random_id" "cluster_suffix" {
   byte_length = 4
 }
 
