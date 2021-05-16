@@ -2,15 +2,15 @@ steps:
 
 - name: 'binxio/terratest-runner-gcp'
   args: ['go', 'mod', 'init', 'terraunittest']
-  dir: 'tests/unit/${_MOD_NAME}'
+  dir: 'tests/unit'
 
 - name: 'binxio/terratest-runner-gcp'
   args: ['go', 'mod', 'tidy']
-  dir: 'tests/unit/${_MOD_NAME}'
+  dir: 'tests/unit'
 
 - name: 'binxio/terratest-runner-gcp'
-  args: ['go', 'test', '-v', '.', '-timeout', '120m', '-p', '1']
-  dir: 'tests/unit/${_MOD_NAME}'
+  args: ['go', 'test', '-v', './...', '-timeout', '120m', '-p', '1']
+  dir: 'tests/unit'
   env: ['GCLOUD_PROJECT=kc-gke-wp']
 
-timeout: 1200s
+timeout: 7200s
