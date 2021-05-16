@@ -40,6 +40,9 @@ module "wordpress-deployment" {
   imported_cluster_endpoint = module.gke-cluster.cluster_endpoint
   imported_cluster_ca_certificate = module.gke-cluster.cluster_ca_certificate
   imported_cloud_sql_name = module.cloud-sql-server.sql_instance_connection_name
+  imported_pvc_name = module.pvc.pvc_name
+  imported_csql_inst_cred_sec_name = module.secret-cloud-sql-instance-credentials.sec_name
+  imported_csql_db_cred_sec_name = module.secret-cloud-sql-db-credentials.sec_name
 }
 
 module "wordpress-service" {
