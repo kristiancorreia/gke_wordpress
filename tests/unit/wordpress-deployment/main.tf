@@ -31,15 +31,11 @@ module "secret-cloud-sql-instance-credentials" {
   imported_sa_key = module.service-account.service_account_key
 }
 
-module "cloudsql-mysql-server" {
-  source = "../../../modules/cloudsql-mysql-server"
-}
-
 module "wordpress-deployment" {
   source = "../../../modules/wordpress-deployment"
   imported_cluster_endpoint = module.test-gke-cluster.cluster_endpoint
   imported_cluster_ca_certificate = module.test-gke-cluster.cluster_ca_certificate
-  imported_cloud_sql_name = module.cloudsql-mysql-server.sql_instance_connection_name
+  imported_cloud_sql_name = "foo"
   imported_pvc_name = module.pvc.pvc_name
   imported_csql_inst_cred_sec_name = module.secret-cloud-sql-instance-credentials.sec_name
   imported_csql_db_cred_sec_name = module.secret-cloud-sql-db-credentials.sec_name
